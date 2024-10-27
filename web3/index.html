@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+</head>
+<body>
+    <script>
+
+        var web3 =  new Web3(Web3.givenProvider || 'http://localhost:7545')
+
+        console.log("web3:",web3);
+        
+        web3.eth.getBlockNumber().then(res=>{
+            console.log("区块：",res);
+        })
+
+        
+
+        web3.eth.getChainId().then(res=>{
+            console.log("子链：",res);
+        })
+
+        // 获取账户余额
+        web3.eth.getBalance('0xF69884ffcE9A35cb70293E6FBda39574651853c2').then(res=>{
+            // 使用web3.utils.fromWei将wei单位转换为ether单位
+            console.log("账户余额：",web3.utils.fromWei(res,'ether'));
+        })
+
+        web3.eth.sendTransaction({
+            from:'0xF69884ffcE9A35cb70293E6FBda39574651853c2',
+            to:'0x885C21573D1945d9016D606DAb84A602Ee8076b0',
+            // value:'3478299388287478'
+            value:web3.utils.toWei('0.000000000000000001','ether')
+        }).then(res=>{
+            console.log("交易结果：",res)
+        })
+        
+
+
+    </script>
+</body>
+</html>
